@@ -1,0 +1,43 @@
+# vernam-ile-ifreleme
+python ile vernam şifreleme metodu kullanarak yazıları şifrelemek
+message = input("Lütfen şifrelemek istediğiniz mesajı girin: ")
+key = input("Lütfen anahtar kelimeyi girin (mesaj uzunluğunda olmalıdır): ")
+
+message_ascii = [ord(char) for char in message]
+key_ascii = [ord(char) for char in key]
+
+encrypted_message = [message_ascii[i] ^ key_ascii[i] for i in range(len(message))]
+encrypted_message_ascii = [chr(char) for char in encrypted_message]
+
+print("Şifreli mesaj: " + ''.join(encrypted_message_ascii))
+
+
+
+#vernam şifreleme yötemi ile şifrelemiş olduğunuz kelimenin bir de karşılı taraftan çözümlenmiş haline bakalım fakat anahtar kelimenin uyuştuğuna dikkat edelim 
+
+
+
+
+
+
+encrypted_message = input("Lütfen çözülecek şifreli mesajı girin: ")
+key = input("Lütfen anahtar kelimeyi girin (mesaj uzunluğunda olmalıdır): ")
+
+encrypted_message_ascii = [ord(char) for char in encrypted_message]
+key_ascii = [ord(char) for char in key]
+
+decrypted_message = [encrypted_message_ascii[i] ^ key_ascii[i] for i in range(len(encrypted_message))]
+decrypted_message_ascii = [chr(char) for char in decrypted_message]
+
+print("Asıl mesaj: " + ''.join(decrypted_message_ascii))
+
+
+
+
+
+
+
+
+
+
+
