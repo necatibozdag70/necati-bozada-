@@ -1,0 +1,67 @@
+import tkinter as tk
+import hashlib
+from tkinter import filedialog
+
+# Uygulama penceresi oluştur
+window = tk.Tk()
+window.title("Hash Hesaplama Uygulaması")
+window.geometry("400x300")
+
+# Dosya seçme fonksiyonu
+def select_file():
+    # Dosya seçme penceresi aç
+    file_path = filedialog.askopenfilename()
+    # Seçilen dosyanın yolu label'a yaz
+    file_label.config(text=file_path)
+    # Seçilen dosyanın içeriğini oku
+    with open(file_path, "rb") as file:
+        file_content = file.read()
+    # Dosyanın içeriğinden md5 hash hesapla
+    file_hash = hashlib.md5(file_content).hexdigest()
+    # Hash'i entry'ye yaz
+    file_entry.delete(0, tk.END)
+    file_entry.insert(0, file_hash)
+
+# Hash karşılaştırma fonksiyonu
+def compare_hash():
+    # Entry'lerden hash'leri al
+    file_hash = file_entry.get()
+    paste_hash = paste_entry.get()
+    # Hash'leri karşılaştır
+    if file_hash == paste_hash:
+        result = "Doğrulandı"
+    else:
+        result = "Doğrulanmadı"
+    # Sonucu label'a yaz
+    result_label.config(text=result)
+
+# Dosya seçme butonu oluştur
+select_button = tk.Button(window, text="Dosya Seç", command=select_file)
+select_button.pack()
+
+# Dosya yolu label'ı oluştur
+file_label = tk.Label(window, text="Dosya yolu")
+file_label.pack()
+
+# Dosya hash'i entry'si oluştur
+file_entry = tk.Entry(window)
+file_entry.pack()
+
+# Hash yapıştırma entry'si oluştur
+paste_entry = tk.Entry(window)
+paste_entry.pack()
+
+# Hash karşılaştırma butonu oluştur
+compare_button = tk.Button(window, text="Hash Karşılaştır", command=compare_hash)
+compare_button.pack()
+
+# Karşılaştırma sonucu label'ı oluştur
+result_label = tk.Label(window, text="Sonuç")
+result_label.pack()
+
+# NECATİ BOZDAĞ yazısı oluştur
+name_label = tk.Label(window, text="NECATİ BOZDAĞ", font=("Arial", 16))
+name_label.pack(side=tk.BOTTOM)
+
+# Uygulama penceresini göster
+window.mainloop()
